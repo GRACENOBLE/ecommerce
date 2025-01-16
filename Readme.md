@@ -1,9 +1,22 @@
+
+```
 # E-commerce Project
 
 This is an e-commerce project built with Go. The project aims to provide a robust and scalable platform for online shopping.
+## Tech Stack
 
-## Project Structure
+The project is built using the following technologies:
 
+- **Go**: Programming language for the backend
+- **PostgreSQL**: Relational database
+- **Redis**: In-memory data structure store, used as a cache
+- **Docker**: Containerization platform
+- **Nginx**: Web server
+- **HTML/CSS/JavaScript**: Frontend technologies
+
+## Updated Project Structure
+
+```
 ```
 ecommerce/
 ├── cmd/                    # Main applications of the project
@@ -13,6 +26,7 @@ ecommerce/
 │   ├── config/             # Configuration files and utilities
 │   ├── database/           # Database related code
 │   ├── handlers/           # HTTP handlers
+│   ├── middleware/         # HTTP middleware
 │   ├── models/             # Data models
 │   ├── services/           # Business logic
 │   └── utils/              # Utility functions
@@ -20,6 +34,9 @@ ecommerce/
 ├── web/                    # Web server related files
 │   ├── static/             # Static files (CSS, JS, images)
 │   └── templates/          # HTML templates
+├── scripts/                # Scripts for various tasks
+├── Dockerfile              # Dockerfile for containerizing the application
+├── docker-compose.yml      # Docker Compose file for multi-container setup
 ├── .gitignore              # Git ignore file
 ├── go.mod                  # Go module file
 └── README.md               # Project README file
