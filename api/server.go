@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"github.com/GRACENOBLE/ecommerce/internal/helpers"
+	"github.com/GRACENOBLE/ecommerce/api/routes"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
@@ -37,11 +38,15 @@ func Router() {
 	}
 
 	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
+	
+	// r.GET("/ping", func(c *gin.Context) {
+	// 	c.JSON(200, gin.H{
+	// 		"message": "pong",
+	// 	})
+	// })
+
+	//  This function call registers the user routes with the router
+	routes.RegisterUserRoutes(r)
 
 	port := os.Getenv("SERVER_PORT")
 	if port == "" {
