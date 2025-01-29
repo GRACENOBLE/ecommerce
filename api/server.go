@@ -47,6 +47,7 @@ func Router() {
 
 	//  This function call registers the user routes with the router
 	routes.RegisterUserRoutes(r)
+	routes.RegisterProductRoutes(r)
 
 	port := os.Getenv("SERVER_PORT")
 	if port == "" {
