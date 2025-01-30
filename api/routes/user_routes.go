@@ -19,10 +19,7 @@ func getUser(c *gin.Context) {
 	db := helpers.ConnectDatabase()
 	defer db.Close()
 
-	var user struct {
-		ID   string `json:"id"`
-		Name string `json:"name"`
-	}
+	var user helpers.User
 	err := db.QueryRow(context.Background(), "SELECT id, name FROM users WHERE id = $1", id).Scan(&user.ID, &user.Name)
 	if err != nil {
 		c.JSON(500, gin.H{"error": err.Error()})
