@@ -12,6 +12,8 @@ import (
 	"github.com/joho/godotenv"
 )
 
+//the function below
+
 func Router() {
 	err := godotenv.Load()
 	if err != nil {

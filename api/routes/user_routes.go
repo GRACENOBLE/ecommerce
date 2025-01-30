@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/GRACENOBLE/ecommerce/internal/helpers"
+	"github.com/GRACENOBLE/ecommerce/internal/types"
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,13 +14,13 @@ func RegisterUserRoutes(r *gin.Engine) {
 	r.POST("/user/:name/:passsword/:email", createUser)
 	r.PUT("/user/:id", updateUser)
 }
-
+//
 func getUser(c *gin.Context) {
 	id := c.Param("id")
 	db := helpers.ConnectDatabase()
 	defer db.Close()
 
-	var user helpers.User
+	var user types.User
 	err := db.QueryRow(context.Background(), "SELECT id, name FROM users WHERE id = $1", id).Scan(&user.ID, &user.Name)
 	if err != nil {
 		c.JSON(500, gin.H{"error": err.Error()})
