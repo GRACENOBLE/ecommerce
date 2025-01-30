@@ -1,5 +1,4 @@
 
-```
 # E-commerce Project
 
 This is an e-commerce project built with Go. The project aims to provide a robust and scalable platform for online shopping.
@@ -17,7 +16,7 @@ The project is built using the following technologies:
 
 ## Project Structure
 
-```
+
 ecommerce/
 ```
 ├── api/
@@ -35,8 +34,8 @@ ecommerce/
 ├── .env                    # Environment variables file
 ├── LICENSE                 # Project license file
 ```
-```
-```
+
+
 
 ## Getting Started
 
