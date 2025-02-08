@@ -9,12 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func RegisterUserRoutes(r *gin.Engine) {
-	r.GET("/user/:id", getUser)
-	r.DELETE("/user/:id", deleteUser)
-	r.POST("/user/:name/:passsword/:email", createUser)
-	r.PUT("/user/:id", updateUser)
-}
+
 //
 func getUser(c *gin.Context) {
 	id := c.Param("id")
