@@ -17,13 +17,13 @@ The project is built using the following technologies:
 ## Project Structure
 
 
+```plaintext
 ecommerce/
-```
 ├── api/
 │   └── routes/             # API route definitions
-├── cmd/                    # Main applications of the project
-│   └── app/                # Main application
-│       └── main.go         # Entry point of the application
+├── app/                    # Main application
+│   └── server.go           # Code for creating and running the server
+├── database/               # Database related files
 ├── docs/                   # Documentation files
 ├── internal/               # Private application and library code
 │   ├── helpers/            # Helper functions and utilities
@@ -31,6 +31,7 @@ ecommerce/
 ├── .gitignore              # Git ignore file
 ├── go.mod                  # Go module file
 ├── README.md               # Project README file
+├── main.go                 # Entry point of the application
 ├── .env                    # Environment variables file
 ├── LICENSE                 # Project license file
 ```
