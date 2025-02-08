@@ -6,8 +6,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/GRACENOBLE/ecommerce/internal/helpers"
 	"github.com/GRACENOBLE/ecommerce/api/routes"
+	"github.com/GRACENOBLE/ecommerce/database"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
@@ -20,7 +20,7 @@ func Router() {
 		log.Println("No .env file found, using defaults.")
 	}
 
-	db := helpers.ConnectDatabase()
+	db := database.ConnectDatabase()
 	defer db.Close()
 
 	rows, err := db.Query(context.Background(), "SELECT id, name FROM users")

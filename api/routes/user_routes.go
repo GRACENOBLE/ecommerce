@@ -3,7 +3,8 @@ package routes
 import (
 	"context"
 
-	"github.com/GRACENOBLE/ecommerce/internal/helpers"
+	"github.com/GRACENOBLE/ecommerce/database"
+
 	"github.com/GRACENOBLE/ecommerce/internal/types"
 	"github.com/gin-gonic/gin"
 )
@@ -17,7 +18,7 @@ func RegisterUserRoutes(r *gin.Engine) {
 //
 func getUser(c *gin.Context) {
 	id := c.Param("id")
-	db := helpers.ConnectDatabase()
+	db := database.ConnectDatabase()
 	defer db.Close()
 
 	var user types.User
@@ -36,7 +37,7 @@ func deleteUser(c *gin.Context) {
 
 func createUser(c *gin.Context) {
 	name, password, email := c.Param("name"), c.Param("password"), c.Param("email")
-	db := helpers.ConnectDatabase()
+	db := database.ConnectDatabase()
 	defer db.Close()
 	result, err := db.Exec(context.Background(), "INSERT INTO users (name, password, email) VALUES($1,$2,$3)", name, password, email)
 	if err != nil {
