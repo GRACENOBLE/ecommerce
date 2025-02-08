@@ -1,4 +1,4 @@
-package routes
+package productroutes
 
 import "github.com/gin-gonic/gin"
 
