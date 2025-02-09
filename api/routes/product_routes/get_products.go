@@ -13,7 +13,7 @@ func GetProducts(c *gin.Context) {
 	defer db.Close()
 
 	var products []types.Product
-	rows, err := db.Query(context.Background(), "SELECT id, name FROM products")
+	rows, err := db.Query(context.Background(), "SELECT id, name, description, price, stock_quantity, image_url, created_at, updated_at FROM products")
 	if err != nil {
 		c.JSON(500, gin.H{"error": err.Error()})
 		return
@@ -22,7 +22,7 @@ func GetProducts(c *gin.Context) {
 
 	for rows.Next() {
 		var product types.Product
-		if err := rows.Scan(&product.Id, &product.Name); err != nil {
+		if err := rows.Scan(&product.Id, &product.Name, &product.Description, &product.Price, &product.StockQuantity, &product.ImageURL, &product.CreatedAt, &product.UpdatedAt); err != nil {
 			c.JSON(500, gin.H{"error": err.Error()})
 			return
 		}
