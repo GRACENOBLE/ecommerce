@@ -10,6 +10,7 @@ import (
 
 func GetUser(c *gin.Context) {
 	id := c.Param("id")
+	
 	db := database.ConnectDatabase()
 	defer db.Close()
 
