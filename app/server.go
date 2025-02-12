@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/GRACENOBLE/ecommerce/api"
+	"github.com/GRACENOBLE/ecommerce/database"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
@@ -16,8 +17,10 @@ func Router() {
 	}
 
 	r := gin.Default()
+
+	db := database.ConnectDatabase()
+	defer db.Close()
 	
-	api.RegisterUserRoutes(r)
 	api.RegisterProductRoutes(r)
 
 	port := os.Getenv("SERVER_PORT")
