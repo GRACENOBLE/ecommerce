@@ -19,8 +19,7 @@ The project is built using the following technologies:
 
 ```plaintext
 ecommerce/
-├── api/
-│   └── routes/             # API route definitions
+├── api/                    # Routes and database connection pool   
 ├── app/                    # Main application
 │   └── server.go           # Code for creating and running the server
 ├── database/               # Database related files
@@ -33,7 +32,7 @@ ecommerce/
 ├── README.md               # Project README file
 ├── main.go                 # Entry point of the application
 ├── .env                    # Environment variables file
-├── LICENSE                 # Project license file
+└──  LICENSE                # Project license file
 ```
 
 
