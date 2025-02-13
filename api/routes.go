@@ -4,7 +4,6 @@ import (
 	"context"
 	"database/sql"
 	
-	"github.com/GRACENOBLE/ecommerce/database"
 	"github.com/GRACENOBLE/ecommerce/internal/types"
 	"github.com/gin-gonic/gin"
 )
@@ -73,12 +72,10 @@ func (dbConfig *DBConfig) GetProducts(c *gin.Context) {
 func (dbConfig *DBConfig) GetProductById(c *gin.Context) {
 	id := c.Param("id")
 
-	db := database.ConnectDatabase()
-	defer db.Close()
 
 	var product types.Product
 
-	err := db.QueryRow(context.Background(), "SELECT id, name, description, price, stock_quantity, image_url, created_at, updated_at FROM products WHERE id = $1", id).Scan(&product.Id, &product.Name, &product.Description, &product.Price, &product.StockQuantity, &product.ImageURL, &product.CreatedAt, &product.UpdatedAt)
+	err := dbConfig.DB.QueryRow(context.Background(), "SELECT id, name, description, price, stock_quantity, image_url, created_at, updated_at FROM products WHERE id = $1", id).Scan(&product.Id, &product.Name, &product.Description, &product.Price, &product.StockQuantity, &product.ImageURL, &product.CreatedAt, &product.UpdatedAt)
 	if err != nil {
 		c.JSON(404, gin.H{"error": err.Error()})
 		return
@@ -102,12 +99,9 @@ func (dbConfig *DBConfig) UpdateProduct(c *gin.Context) {
 		return
 	}
 
-	db := database.ConnectDatabase()
-	defer db.Close()
-
 	query := `UPDATE products SET name = COALESCE($1, name), description = COALESCE($2, description), price = COALESCE($3, price), stock_quantity = COALESCE($4, stock_quantity), image_url = COALESCE($5, image_url), updated_at = CURRENT_TIMESTAMP WHERE id = $6 RETURNING id, name, description, price, stock_quantity, image_url, updated_at;`
 	
-	err := db.QueryRow(context.Background(), query, updatedProduct.Name, updatedProduct.Description, updatedProduct.Price, updatedProduct.StockQuantity, updatedProduct.ImageURL, id).Scan(&updatedProduct.Id, &updatedProduct.Name, &updatedProduct.Description, &updatedProduct.Price, &updatedProduct.StockQuantity, &updatedProduct.ImageURL, &updatedProduct.UpdatedAt)
+	err := dbConfig.DB.QueryRow(context.Background(), query, updatedProduct.Name, updatedProduct.Description, updatedProduct.Price, updatedProduct.StockQuantity, updatedProduct.ImageURL, id).Scan(&updatedProduct.Id, &updatedProduct.Name, &updatedProduct.Description, &updatedProduct.Price, &updatedProduct.StockQuantity, &updatedProduct.ImageURL, &updatedProduct.UpdatedAt)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			c.JSON(404, gin.H{"error": "Product not found"})
@@ -127,12 +121,9 @@ func (dbConfig *DBConfig) DeleteProduct(c *gin.Context) {
 		return
 	}
 
-	db := database.ConnectDatabase()
-	defer db.Close()
-
 	query := `DELETE FROM products WHERE id = $1;`
 
-	result, err := db.Exec(context.Background(), query, id)
+	result, err := dbConfig.DB.Exec(context.Background(), query, id)
 	if err != nil {
 		c.JSON(500, gin.H{"error": err.Error()})
 		return
