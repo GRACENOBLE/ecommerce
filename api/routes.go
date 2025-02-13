@@ -3,31 +3,25 @@ package api
 import (
 	"context"
 	"database/sql"
-
-	userroutes "github.com/GRACENOBLE/ecommerce/api/routes/user_routes"
+	
 	"github.com/GRACENOBLE/ecommerce/database"
 	"github.com/GRACENOBLE/ecommerce/internal/types"
 	"github.com/gin-gonic/gin"
 )
 
-func  RegisterProductRoutes(r *gin.Engine) {
-	db := &DBConfig{}
+func  RegisterRoutes(r *gin.Engine, dbConfig *DBConfig) {
+	
 
-	r.GET("/products", db.GetProducts)
-	r.GET("/product/:id", db.GetProductById)
-	r.POST("/products", db.CreateProduct)
-	r.PUT("/products/:id", db.UpdateProduct)
-	r.DELETE("/products/:id", db.DeleteProduct)
+	r.GET("/products", dbConfig.GetProducts)
+	r.GET("/product/:id", dbConfig.GetProductById)
+	r.POST("/products", dbConfig.CreateProduct)
+	r.PUT("/products/:id", dbConfig.UpdateProduct)
+	r.DELETE("/products/:id", dbConfig.DeleteProduct)
+	// r.GET("/user/:id", db.GetUser)
+	// r.DELETE("/user/:id", db.DeleteUser)
+	// r.POST("/user/:name/:passsword/:email", db.CreateUser)
+	// r.PUT("/user/:id", db.UpdateUser)
 }
-
-
-func (dbConfig *DBConfig) RegisterUserRoutes(r *gin.Engine) {
-	r.GET("/user/:id", userroutes.GetUser)
-	r.DELETE("/user/:id", userroutes.DeleteUser)
-	r.POST("/user/:name/:passsword/:email", userroutes.CreateUser)
-	r.PUT("/user/:id", userroutes.UpdateUser)
-}
-
 
 func (dbConfig *DBConfig) CreateProduct(c *gin.Context) {
 	var newProduct types.Product
@@ -37,12 +31,9 @@ func (dbConfig *DBConfig) CreateProduct(c *gin.Context) {
 		return
 	}
 
-	db := database.ConnectDatabase()
-	defer db.Close()
-
 	query := `INSERT INTO products (name, description, price, stock_quantity, image_url, created_at, updated_at) VALUES ($1, $2, $3, $4, $5, NOW(), NOW()) RETURNING id`
 	
-	err := db.QueryRow(context.Background(), query, newProduct.Name, newProduct.Description, newProduct.Price, newProduct.StockQuantity, newProduct.ImageURL).Scan(&newProduct.Id)
+	err := dbConfig.DB.QueryRow(context.Background(), query, newProduct.Name, newProduct.Description, newProduct.Price, newProduct.StockQuantity, newProduct.ImageURL).Scan(&newProduct.Id)
 	if err != nil {
 		c.JSON(500, gin.H{"error": err.Error()})
 		return
@@ -52,11 +43,10 @@ func (dbConfig *DBConfig) CreateProduct(c *gin.Context) {
 }
 
 func (dbConfig *DBConfig) GetProducts(c *gin.Context) {
-	db := database.ConnectDatabase()
-	defer db.Close()
+
 
 	var products []types.Product
-	rows, err := db.Query(context.Background(), "SELECT id, name, description, price, stock_quantity, image_url, created_at, updated_at FROM products")
+	rows, err := dbConfig.DB.Query(context.Background(), "SELECT id, name, description, price, stock_quantity, image_url, created_at, updated_at FROM products")
 	if err != nil {
 		c.JSON(500, gin.H{"error": err.Error()})
 		return

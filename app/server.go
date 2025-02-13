@@ -16,12 +16,18 @@ func Router() {
 		log.Println("No .env file found, using defaults.")
 	}
 
+	db := database.ConnectDatabase()
+
+	defer func() {
+		log.Println("Closing database connection...")
+		db.Close()
+	}()
+
 	r := gin.Default()
 
-	db := database.ConnectDatabase()
-	defer db.Close()
-	
-	api.RegisterProductRoutes(r)
+	dbConfig := &api.DBConfig{DB: db}
+
+	api.RegisterRoutes(r, dbConfig)
 
 	port := os.Getenv("SERVER_PORT")
 	if port == "" {
