@@ -13,6 +13,7 @@ func RegisterRoutes(r *gin.Engine, dbConfig *DBConfig) {
 	r.DELETE("/products/:id", dbConfig.DeleteProduct)
 	// r.GET("/user/:id", db.GetUser)
 	// r.DELETE("/user/:id", db.DeleteUser)
-	r.POST("/user/", dbConfig.CreateUser)
+	r.POST("/user", dbConfig.CreateUser)
+	r.POST("/login", dbConfig.Login)
 	// r.PUT("/user/:id", db.UpdateUser)
 }
