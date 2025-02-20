@@ -31,12 +31,15 @@ func (dbConfig *DBConfig) Login(c *gin.Context) {
 		return
 	}
 
-	token, err := auth.CreateToken(storedUser.Email, "user")
+	accessToken, refreshToken, err := auth.CreateTokenPair(storedUser.Email, "user")
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to generate token"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to generate tokens"})
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"token": token})
+	c.JSON(http.StatusOK, gin.H{
+		"access_token":  accessToken,
+		"refresh_token": refreshToken,
+	})
 
 }

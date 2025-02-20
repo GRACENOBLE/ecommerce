@@ -1,19 +1,27 @@
 package api
 
 import (
+	"github.com/GRACENOBLE/ecommerce/internal/helpers/middleware"
 	"github.com/gin-gonic/gin"
 )
 
 func RegisterRoutes(r *gin.Engine, dbConfig *DBConfig) {
 
-	r.GET("/products", dbConfig.GetProducts)
-	r.GET("/product/:id", dbConfig.GetProductById)
-	r.POST("/products", dbConfig.CreateProduct)
-	r.PUT("/products/:id", dbConfig.UpdateProduct)
-	r.DELETE("/products/:id", dbConfig.DeleteProduct)
+	productRoutes := r.Group("/products")
+	productRoutes.Use(middleware.JWTAuthMiddleware())
+	{
+		productRoutes.GET("/", dbConfig.GetProducts)
+		productRoutes.GET("/:id", dbConfig.GetProductById)
+		productRoutes.POST("/", dbConfig.CreateProduct)
+		productRoutes.PUT("/:id", dbConfig.UpdateProduct)
+		productRoutes.DELETE("/:id", dbConfig.DeleteProduct)
+	}
+
 	// r.GET("/user/:id", db.GetUser)
 	// r.DELETE("/user/:id", db.DeleteUser)
 	r.POST("/user", dbConfig.CreateUser)
 	r.POST("/login", dbConfig.Login)
+	r.POST("/refresh", dbConfig.RefreshToken)
+
 	// r.PUT("/user/:id", db.UpdateUser)
 }
