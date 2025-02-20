@@ -29,5 +29,9 @@ func (dbConfig *DBConfig) CreateUser(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusCreated, newUser)
+	c.JSON(http.StatusCreated, gin.H{
+		"user":  newUser.Name,
+		"enail": newUser.Email,
+		"role":  newUser.Role,
+	})
 }
