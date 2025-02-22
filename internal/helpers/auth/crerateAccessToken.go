@@ -10,7 +10,7 @@ import (
 )
 
 // CreateToken generates a JWT for a given user email and role.
-func CreateToken(email, role string) (string, error) {
+func CreateAccessToken(email, role string) (string, error) {
 
 	err := godotenv.Load()
 	if err != nil {
