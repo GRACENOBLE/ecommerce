@@ -3,6 +3,7 @@ package api
 import (
 	"context"
 	"net/http"
+	"time"
 
 	"github.com/GRACENOBLE/ecommerce/internal/helpers/auth"
 	"github.com/GRACENOBLE/ecommerce/internal/types"
@@ -37,9 +38,18 @@ func (dbConfig *DBConfig) Login(c *gin.Context) {
 		return
 	}
 
+	c.SetCookie(
+		"refresh_token",               // Cookie name
+		refreshToken,                  // Cookie value
+		int(7*24*time.Hour.Seconds()), // Cookie expiration time in seconds (e.g., 7 days)
+		"/",                           // Cookie path
+		"",                            // Cookie domain (empty means the current domain)
+		true,                          // Secure flag (true ensures the cookie is sent over HTTPS only)
+		true,                          // HttpOnly flag (true prevents JavaScript access)
+	)
+
 	c.JSON(http.StatusOK, gin.H{
-		"access_token":  accessToken,
-		"refresh_token": refreshToken,
+		"access_token": accessToken,
 	})
 
 }
