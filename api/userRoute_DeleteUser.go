@@ -2,7 +2,6 @@ package api
 
 import (
 	"context"
-	"database/sql"
 	"net/http"
 
 	"github.com/GRACENOBLE/ecommerce/internal/types"
@@ -16,7 +15,7 @@ func (dbConfig DBConfig) DeleteUser(c *gin.Context) {
 
 	checkIfUserExists := "SELECT name FROM users where id = $1"
 	if err := dbConfig.DB.QueryRow(context.Background(), checkIfUserExists, userId).Scan(&user.Name); err != nil {
-		if err == sql.ErrNoRows {
+		if err.Error() == "no rows in result set" {
 			c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
 		} else {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to check if user exists"})
