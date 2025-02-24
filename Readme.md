@@ -12,7 +12,7 @@ The project is built using the following technologies:
 - **Redis**: In-memory data structure store, used as a cache
 - **Docker**: Containerization platform
 - **Nginx**: Web server
-- **HTML/CSS/JavaScript**: Frontend technologies
+- **NextJs**: Frontend technologies
 
 ## Project Structure
 
