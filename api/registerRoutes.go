@@ -16,12 +16,15 @@ func RegisterRoutes(r *gin.Engine, dbConfig *DBConfig) {
 		productRoutes.PUT("/:id", dbConfig.UpdateProduct)
 		productRoutes.DELETE("/:id", dbConfig.DeleteProduct)
 	}
-
-	// r.GET("/user/:id", db.GetUser)
-	// r.DELETE("/user/:id", db.DeleteUser)
+	
+	protectedUserRoutes := r.Group("/user")	
+	protectedUserRoutes.Use(middleware.JWTAuthMiddleware())
+	{
+		productRoutes.DELETE("/:id", dbConfig.DeleteUser)
+		// r.PUT("/:id", db.UpdateUser)
+	}
+	productRoutes.POST("/refresh", dbConfig.RefreshToken)
 	r.POST("/user", dbConfig.CreateUser)
 	r.POST("/login", dbConfig.Login)
-	r.POST("/refresh", dbConfig.RefreshToken)
 
-	// r.PUT("/user/:id", db.UpdateUser)
 }
