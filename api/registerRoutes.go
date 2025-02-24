@@ -20,10 +20,10 @@ func RegisterRoutes(r *gin.Engine, dbConfig *DBConfig) {
 	protectedUserRoutes := r.Group("/user")	
 	protectedUserRoutes.Use(middleware.JWTAuthMiddleware())
 	{
-		productRoutes.DELETE("/:id", dbConfig.DeleteUser)
+		protectedUserRoutes.DELETE("/:id", dbConfig.DeleteUser)
 		// r.PUT("/:id", db.UpdateUser)
 	}
-	productRoutes.POST("/refresh", dbConfig.RefreshToken)
+	r.POST("/refresh", dbConfig.RefreshToken)
 	r.POST("/user", dbConfig.CreateUser)
 	r.POST("/login", dbConfig.Login)
 
