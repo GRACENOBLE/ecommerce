@@ -3,7 +3,7 @@
 This is an e-commerce project built with Go. The project aims to provide a robust and scalable platform for online shopping.
 
 ## Project Architecture and stack
-For a complete rundown of the bigger picture as well as the stack used visit [Architecture](/docs/architecture.md)
+For a complete rundown of the bigger picture as well as the stack used visit: [Architecture](/docs/architecture.md)
 
 
 ## Project Structure
@@ -95,9 +95,6 @@ To get started with the project, follow these steps:
 
     Ensure you have a `.env` file in the root of your project with the necessary environment variables configured.
 
-6. **Documentation:**
-
-    For more details on the project architecture and stack, visit the [Architecture](/docs/architecture.md) documentation.
 
 You are now ready to start developing and contributing to the project!
 
