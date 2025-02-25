@@ -4,8 +4,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/GRACENOBLE/ecommerce/api"
-	"github.com/GRACENOBLE/ecommerce/database"
+	"github.com/GRACENOBLE/ecommerce/internal/api"
+	"github.com/GRACENOBLE/ecommerce/internal/database"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
