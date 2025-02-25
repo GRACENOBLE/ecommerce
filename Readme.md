@@ -8,7 +8,7 @@ For a complete rundown of the bigger picture as well as the stack used visit [Ar
 
 ## Project Structure
 
-```plaintext
+```
 ecommerce/
 ├── bin/                    # Compiled binaries
 ├── cmd/                    # Main applications for the project
@@ -35,7 +35,7 @@ To get started with the project, follow these steps:
 1. **Clone the repository:**
 
     ```sh
-    git clone https://github.com/yourusername/ecommerce.git
+    git clone https://github.com/GRACENOBLE/ecommerce.git
     cd ecommerce
     ```
 
