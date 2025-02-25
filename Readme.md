@@ -1,18 +1,10 @@
-
-# E-commerce Project
+# E-commerce Project - Go BACKEND
 
 This is an e-commerce project built with Go. The project aims to provide a robust and scalable platform for online shopping.
 
-## Tech Stack
+## Project Architecture and stack
+For a complete rundown of the bigger picture as well as the stack used visit [Architecture](/docs/architecture.md)
 
-The project is built using the following technologies:
-
-- **Go**: Programming language for the backend
-- **PostgreSQL**: Relational database
-- **Redis**: In-memory data structure store, used as a cache
-- **Docker**: Containerization platform
-- **Nginx**: Web server
-- **NextJs**: Frontend technologies
 
 ## Project Structure
 
@@ -24,7 +16,7 @@ ecommerce/
 │       └── main.go         # Entry point of the application
 ├── docs/                   # Documentation files
 ├── internal/               # Private application and library code
-│   ├── api/                # Routes and database connection pool 
+│   ├── api/                # Routes and database connection pool
 │   ├── app/                # Main application
 │   │   └── server.go       # Code for creating and running the server
 │   ├── database/           # Database related files
@@ -37,8 +29,6 @@ ecommerce/
 └── LICENSE                 # Project license file
 ```
 
-
-
 ## Getting Started
 
 To get started with the project, clone the repository and run the following commands:
@@ -47,7 +37,7 @@ To get started with the project, clone the repository and run the following comm
 git clone https://github.com/yourusername/ecommerce.git
 cd ecommerce
 go mod tidy
-go run cmd/ecommerce/main.go
+go run cmd/ecommerceBackend/main.go
 ```
 
 ## Contributing
