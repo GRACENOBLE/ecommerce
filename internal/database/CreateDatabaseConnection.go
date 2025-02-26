@@ -12,11 +12,14 @@ import (
 
 func ConnectDatabase() *pgxpool.Pool {
 	//Load the database URL from the .env file
-	err := godotenv.Load()
-	if err != nil {
-		log.Println("No .env file found, using defaults.")
-	}
-
+	if os.Getenv("ENV") != "production" {
+        // Load environment variables from .env file
+        err := godotenv.Load()
+        if err != nil {
+            log.Println("No .env file found, using system environment variables.")
+        }
+    }
+	
 	databaseURL := os.Getenv("DATABASE_URL")
 
 	// Create a connection pool
