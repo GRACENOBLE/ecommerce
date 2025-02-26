@@ -15,7 +15,12 @@ for target in "${targets[@]}"; do
     echo "Building for $goos/$goarch..."
     
     # Set environment variables and build
-    GOOS=$goos GOARCH=$goarch go build -o "$output" ./cmd/ecommerceBackend
+    GOOS=$goos GOARCH=$goarch go build -tags netgo -ldflags '-s -w' -o "$output" ./cmd/ecommerceBackend
+
+    if [ "$goos" = "linux" ]; then
+        chmod +x "$output"
+    fi
+    
 done
 
 echo "Builds completed!"
