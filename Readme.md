@@ -10,7 +10,7 @@ For a complete rundown of the bigger picture as well as the stack used visit: [A
 
 ```
 ecommerce/
-├── bin/                    # Compiled binaries
+├── bin/                    # Compiled binaries from build scripts
 ├── cmd/                    # Main applications for the project
 │   └── ecommerceBackend/   # Backend application
 │       └── main.go         # Entry point of the application
@@ -20,13 +20,17 @@ ecommerce/
 │   ├── app/                # Main application
 │   │   └── server.go       # Code for creating and running the server
 │   ├── database/           # Database related files
+│   │   └── queries         # Queries for working with data from the database.
 │   ├── helpers/            # Helper functions and utilities
+│   │   ├── auth            # Authentication helper functions
+│   │   └── middleware      # Middleware helper functions
 │   └── types/              # Type definitions and database models
+├── .env                    # Environment variables file
 ├── .gitignore              # Git ignore file
 ├── go.mod                  # Go module file
-├── README.md               # Project README file
-├── .env                    # Environment variables file
-└── LICENSE                 # Project license file
+├── go.sum                  # Dependency integrity file
+├── LICENSE                 # Project license file
+└── Readme.md               # Project README file
 ```
 ## Getting Started
 
@@ -34,20 +38,20 @@ To get started with the project, follow these steps:
 
 1. **Clone the repository:**
 
-    ```sh
+    ```bash
     git clone https://github.com/GRACENOBLE/ecommerce.git
     cd ecommerce
     ```
 
 2. **Install dependencies:**
 
-    ```sh
+    ```bash
     go mod tidy
     ```
 
 3. **Run the application:**
 
-    ```sh
+    ```bash
     go run cmd/ecommerceBackend/main.go
     ```
 
@@ -55,7 +59,7 @@ To get started with the project, follow these steps:
 
     You can use the provided script to build binaries for Linux, macOS, and Windows. Create a file named `build.sh` in the root of your project and add the following content:
 
-    ```sh
+    ```bash
     #!/bin/bash
     set -e
 
@@ -81,13 +85,13 @@ To get started with the project, follow these steps:
 
     Make the script executable:
 
-    ```sh
+    ```bash
     chmod +x build.sh
     ```
 
     Run the script to build the binaries:
 
-    ```sh
+    ```bash
     ./build.sh
     ```
 
