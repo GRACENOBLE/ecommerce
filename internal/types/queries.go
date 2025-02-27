@@ -9,5 +9,9 @@ type UserQueries struct {
 }
 
 type ProductQueries struct {
-
+	CreateProduct string
+	GetAllProducts string
+	GetProductById string
+	UpdateProduct string
+	DeleteProduct string
 }

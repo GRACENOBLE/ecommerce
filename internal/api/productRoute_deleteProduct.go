@@ -4,6 +4,7 @@ import (
 	"context"
 	"net/http"
 
+	"github.com/GRACENOBLE/ecommerce/internal/database/queries"
 	"github.com/gin-gonic/gin"
 )
 
@@ -14,9 +15,7 @@ func (dbConfig *DBConfig) DeleteProduct(c *gin.Context) {
 		return
 	}
 
-	query := `DELETE FROM products WHERE id = $1;`
-
-	result, err := dbConfig.DB.Exec(context.Background(), query, id)
+	result, err := dbConfig.DB.Exec(context.Background(), queries.Product.DeleteProduct, id)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return

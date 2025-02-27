@@ -4,6 +4,7 @@ import (
 	"context"
 	"net/http"
 
+	"github.com/GRACENOBLE/ecommerce/internal/database/queries"
 	"github.com/GRACENOBLE/ecommerce/internal/types"
 	"github.com/gin-gonic/gin"
 )
@@ -11,7 +12,7 @@ import (
 func (dbConfig *DBConfig) GetProducts(c *gin.Context) {
 
 	var products []types.Product
-	rows, err := dbConfig.DB.Query(context.Background(), "SELECT id, name, description, price, stock_quantity, image_url, created_at, updated_at FROM products")
+	rows, err := dbConfig.DB.Query(context.Background(), queries.Product.GetAllProducts)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
