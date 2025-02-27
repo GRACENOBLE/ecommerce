@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/GRACENOBLE/ecommerce/internal/database/queries"
 	"github.com/GRACENOBLE/ecommerce/internal/helpers/auth"
 	"github.com/GRACENOBLE/ecommerce/internal/types"
 	"github.com/gin-gonic/gin"
@@ -20,8 +21,8 @@ func (dbConfig *DBConfig) Login(c *gin.Context) {
 
 	var storedUser types.User
 
-	query := "SELECT id, name, password, email FROM users WHERE email = $1"
-	err := dbConfig.DB.QueryRow(context.Background(), query, loginData.Email).Scan(&storedUser.ID, &storedUser.Name, &storedUser.Password, &storedUser.Email)
+	
+	err := dbConfig.DB.QueryRow(context.Background(), queries.User.GetUserByEmail, loginData.Email).Scan(&storedUser.ID, &storedUser.Name, &storedUser.Password, &storedUser.Email)
 	if err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid email or password"})
 		return

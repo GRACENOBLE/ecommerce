@@ -3,6 +3,7 @@ package api
 import (
 	"context"
 
+	"github.com/GRACENOBLE/ecommerce/internal/database/queries"
 	"github.com/GRACENOBLE/ecommerce/internal/types"
 	"github.com/gin-gonic/gin"
 )
@@ -16,8 +17,7 @@ func (dbConfig DBConfig) UpdateUser(c *gin.Context) {
 		return
 	}
 
-	query := "UPDATE users SET name = $1, password = $2, email = $3 WHERE id = $4"
-	_, err := dbConfig.DB.Exec(context.Background(), query, user.Name, user.Password, user.Email, userId)
+	_, err := dbConfig.DB.Exec(context.Background(), queries.User.UpdateUser, user.Name, user.Password, user.Email, userId)
 	if err != nil {
 		c.JSON(500, gin.H{"error": err.Error()})
 		return

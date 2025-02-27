@@ -4,6 +4,7 @@ import (
 	"context"
 	"net/http"
 
+	"github.com/GRACENOBLE/ecommerce/internal/database/queries"
 	"github.com/GRACENOBLE/ecommerce/internal/types"
 	"github.com/gin-gonic/gin"
 )
@@ -13,8 +14,7 @@ func (dbConfig DBConfig) DeleteUser(c *gin.Context) {
 
 	var user types.User
 
-	checkIfUserExists := "SELECT name FROM users where id = $1"
-	if err := dbConfig.DB.QueryRow(context.Background(), checkIfUserExists, userId).Scan(&user.Name); err != nil {
+	if err := dbConfig.DB.QueryRow(context.Background(), queries.User.CheckIfUserExists, userId).Scan(&user.Name); err != nil {
 		if err.Error() == "no rows in result set" {
 			c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
 		} else {
@@ -23,8 +23,7 @@ func (dbConfig DBConfig) DeleteUser(c *gin.Context) {
 		return
 	}
 
-	query := "DELETE FROM users where id = $1"
-	_, err := dbConfig.DB.Exec(context.Background(), query, userId)
+	_, err := dbConfig.DB.Exec(context.Background(), queries.User.DeleteUser, userId)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to delete user"})
 		return
