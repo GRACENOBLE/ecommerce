@@ -25,6 +25,7 @@ ecommerce/
 │   │   ├── auth            # Authentication helper functions
 │   │   └── middleware      # Middleware helper functions
 │   └── types/              # Type definitions and database models
+├── scripts                 # Scripts for easier workflow
 ├── .env                    # Environment variables file
 ├── .gitignore              # Git ignore file
 ├── go.mod                  # Go module file
