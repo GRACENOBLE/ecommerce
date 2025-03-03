@@ -33,7 +33,7 @@ func RefreshAccessToken(refreshToken string) (string, error) {
 	}
 
 	// Generate a new access token
-	accessToken, err := CreateAccessToken(claims.Email, claims.Role)
+	accessToken, err := CreateAccessToken(claims.ID, claims.Email, claims.Role)
 	if err != nil {
 		return "", err
 	}

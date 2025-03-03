@@ -22,6 +22,7 @@ func RegisterRoutes(r *gin.Engine, dbConfig *DBConfig) {
 	{
 		protectedUserRoutes.DELETE("/:id", dbConfig.DeleteUser)
 		protectedUserRoutes.PUT("/:id", dbConfig.UpdateUser)
+		protectedUserRoutes.GET("/data", dbConfig.ReturnUserData)
 	}
 	r.POST("/refresh", dbConfig.RefreshToken)
 	r.POST("/user", dbConfig.CreateUser)

@@ -10,7 +10,7 @@ import (
 )
 
 // CreateToken generates a JWT for a given user email and role.
-func CreateAccessToken(email, role string) (string, error) {
+func CreateAccessToken(id, email, role string) (string, error) {
 
 	err := godotenv.Load()
 	if err != nil {
@@ -23,6 +23,7 @@ func CreateAccessToken(email, role string) (string, error) {
 	// Set claims
 	claims := token.Claims.(jwt.MapClaims)
 	claims["authorized"] = true
+	claims["sub"] = id
 	claims["email"] = email
 	claims["role"] = role
 	claims["exp"] = time.Now().Add(15 * time.Minute).Unix()

@@ -8,6 +8,7 @@ var User = types.UserQueries{
 	DeleteUser: `DELETE FROM users WHERE id = $1`,
     CheckIfUserExists : `SELECT name FROM users where id = $1`,
     GetUserByEmail: `SELECT id, name, password, email FROM users WHERE email = $1`,
+    GetUserByID: `SELECT name, email FROM users WHERE id = $1`,
 }
 
 var Product = types.ProductQueries {
@@ -16,5 +17,4 @@ var Product = types.ProductQueries {
     GetProductById: `SELECT id, name, description, price, stock_quantity, image_url, created_at, updated_at FROM products WHERE id = $1`,
     UpdateProduct: `UPDATE products SET name = COALESCE($1, name), description = COALESCE($2, description), price = COALESCE($3, price), stock_quantity = COALESCE($4, stock_quantity), image_url = COALESCE($5, image_url), updated_at = CURRENT_TIMESTAMP WHERE id = $6 RETURNING id, name, description, price, stock_quantity, image_url, updated_at;`,
     DeleteProduct: `DELETE FROM products WHERE id = $1;`,
-
 }

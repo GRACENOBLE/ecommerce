@@ -6,6 +6,7 @@ type UserQueries struct {
     DeleteUser string
 	CheckIfUserExists string
 	GetUserByEmail string
+	GetUserByID string
 }
 
 type ProductQueries struct {
