@@ -32,8 +32,10 @@ func RefreshAccessToken(refreshToken string) (string, error) {
 		return "", errors.New("invalid token claims")
 	}
 
+	log.Printf("CLAIMS: %v", claims)
+
 	// Generate a new access token
-	accessToken, err := CreateAccessToken(claims.ID, claims.Email, claims.Role)
+	accessToken, err := CreateAccessToken(claims.UserID, claims.Email, claims.Role)
 	if err != nil {
 		return "", err
 	}

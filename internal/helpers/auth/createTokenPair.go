@@ -34,7 +34,10 @@ func CreateTokenPair(id, email, role string) (accessToken string, refreshToken s
 
 	// Create Refresh Token
 	refreshTokenClaims := jwt.MapClaims{
-		"email": email,
+		"authorized": true,
+		"sub":        id,
+		"email":      email,
+		"role":       role,
 		"exp":   time.Now().Add(7 * 24 * time.Hour).Unix(), // 7 days
 	}
 	refreshTokenObj := jwt.NewWithClaims(jwt.SigningMethodHS256, refreshTokenClaims)
