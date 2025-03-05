@@ -10,7 +10,7 @@ import (
 
 func RegisterRoutes(r *gin.Engine, dbConfig *DBConfig) {
 	r.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://localhost:3000", "https://scalable-ecom-frontend.vercel.app/"},
+		AllowOrigins:     []string{"http://localhost:3000","http://localhost:3001", "https://scalable-ecom-frontend.vercel.app/"},
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowHeaders:     []string{"Origin", "Content-Type", "Accept", "Authorization"},
 		AllowCredentials: true,
